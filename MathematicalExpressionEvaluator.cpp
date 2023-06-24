@@ -1,3 +1,9 @@
+//
+// Max Base
+// https://github.com/BaseMax/MathematicalExpressionEvaluator
+// 06/24/2023
+//
+
 #include <iostream>
 #include <stack>
 #include <string>
@@ -31,11 +37,21 @@ int evaluateExpression(const string& expression) {
     stack<int> values;
     stack<char> operators;
 
-    for (char c : expression) {
-        if (c >= '0' && c <= '9') {
-            values.push(c - '0');
-        } else if (c == '(') {
+    int i = 0;
+    while (i < expression.length()) {
+        char c = expression[i];
+
+        if (c == '(') {
             operators.push(c);
+        } else if (isdigit(c)) {
+            int num = 0;
+            while (i < expression.length() && isdigit(expression[i])) {
+                num = num * 10 + (expression[i] - '0');
+                i++;
+            }
+            i--;
+
+            values.push(num);
         } else if (c == ')') {
             while (operators.top() != '(') {
                 char op = operators.top();
@@ -67,6 +83,8 @@ int evaluateExpression(const string& expression) {
 
             operators.push(c);
         }
+
+        i++;
     }
 
     while (!operators.empty()) {
@@ -99,7 +117,7 @@ int main() {
     // User input
     string expression;
     cout << "Enter the mathematical expression: ";
-    cin >> expression;
+    getline(cin, expression);
 
     int result = evaluateExpression(expression);
     cout << "Result: " << result << endl;
