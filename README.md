@@ -27,9 +27,13 @@ Enter a mathematical expression without spaces and press Enter. The program will
 ## Examples
 
 **Expression:** (5+((8+2)*2))
+
 **Result:** 25
 
+---------------
+
 **Expression:** ((6*(2+1))*(3+(3+1)))
+
 **Result:** 126
 
 ## License
